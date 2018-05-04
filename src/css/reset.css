@@ -71,7 +71,7 @@ a:hover {
   box-sizing: border-box;
 }
 
-div,ul,table,tr,td,th,h3,span {
+div,ul,table,tr,td,th,h3,span,h2 {
   -webkit-box-sizing: border-box;
   -moz-box-sizing: border-box;
   -ms-box-sizing: border-box;

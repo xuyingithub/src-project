@@ -1,0 +1,82 @@
+//进度条
+.el-step__head.is-finish{
+  color: #318CB8;
+}
+.el-step__head{
+  .el-step__line{
+    background-color: #BBBBBB;
+    top:30px !important;
+    .el-step__line-inner{
+      border-color: #318CB8;
+    }
+  }
+  .el-step__icon{
+    width: 70px;
+    height: 60px;
+    .el-step__icon-inner{
+      font-size: 50px;
+    }
+  }
+}
+
+
+
+.el-step__main{
+  .el-step__title{
+    ont-family: PingFangSC-Medium;
+    font-size: 14px;
+    color: #BBBBBB;
+    letter-spacing: -0.49px;
+  }
+  .el-step__title.is-finish{
+    color: #318CB8;
+  }
+}
+
+
+
+//标签页
+.el-tabs__nav-wrap::after{
+  background-color: #fff;
+}
+.el-tabs__active-bar{
+ background-color: #318CB8;
+}
+.el-tabs__item{
+  font-family: PingFangSC-Light;
+  font-size: 14px;
+  color: #333333;
+  letter-spacing: -0.49px;
+}
+.el-tabs__item.is-active{
+  color: #318CB8;
+  font-weight: bold;
+}
+
+
+
+//手风琴
+.el-collapse{
+  border:none;
+}
+.el-collapse-item__header{
+  height: 60px;
+  font-family: PingFangSC-Medium;
+  font-size: 16px;
+  color: #318CB8;
+  line-height: 60px;
+  border-bottom: none;
+  .el-collapse-item__arrow{
+    float: none;
+  }
+}
+
+.el-collapse-item__wrap{
+  border-bottom: none;
+  .el-collapse-item__content{
+    font-family: PingFangSC-Regular;
+    font-size: 14px;
+    color: #666666;
+    line-height: 21px;
+  }
+}

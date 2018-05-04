@@ -18,6 +18,10 @@ var _elementUi2 = _interopRequireDefault(_elementUi);
 
 require('element-ui/lib/theme-chalk/index.css');
 
+require('./css/elementUI-reset.scss');
+
+require('./css/reset.css');
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 _vue2.default.use(_elementUi2.default); // The Vue build version to load with the `import` command

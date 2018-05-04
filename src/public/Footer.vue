@@ -18,7 +18,6 @@
     </section>
 </template>
 <style lang="scss" scoped>
-  @import '../css/reset.css';
     .footer{
       width: 100%;
       height: 100%;
@@ -28,7 +27,7 @@
         background: #224E6B;
         overflow:hidden;
         .message{
-          width: 1400px;
+          width: 1540px;
           height: 300px;
           margin: 51px auto;
           .messageLi{
@@ -42,14 +41,16 @@
               line-height: 25px;
               color: #3DB4EA;
               font-size: 18px;
+              font-family: PingFangSC-Regular;
             }
             .messageDetial{
               width: 100%;
-              height: 245px;
-              margin-top: 30px;
+              height: 160px;
+              margin-top: 50px;
               li{
                 width: 100%;
                 height: 20%;
+                font-family: PingFangSC-Regular;
                 a{
                   text-align: center;
                   display: inline-block;
@@ -57,6 +58,7 @@
                   height: 100%;
                   color: #9FA0A2;
                   font-size: 14px;
+                  text-decoration: none;
                 }
               }
             }

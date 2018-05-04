@@ -1,13 +1,20 @@
 <template>
     <section class="header">
        <div class="headerBox">
-         <span class=" icon el-icon-date"></span>
-         <ul class="title">
-           <li v-for="item in items"
-               @click="chooseTitle(item)"
-               :class="{choose:item.choose}">
-             {{item.title}}</li>
-         </ul>
+         <span class="icon el-icon-date"></span>
+         <div class="menu">
+           <el-menu
+             default-active="/menu/index"
+             class="el-menu-demo"
+             :router="true"
+             mode="horizontal"
+             @select="handleSelect"
+             background-color="transparent"
+             text-color="#fff"
+             active-text-color="#fff">
+             <el-menu-item  v-for="menu in menus" :key="menu.name" :index="menu.path">{{menu.name}}</el-menu-item>
+           </el-menu>
+         </div>
          <ul class="operate">
            <li>登录</li>
            <li v-if="registerShow">注册</li>
@@ -16,7 +23,6 @@
     </section>
 </template>
 <style lang="scss" scoped>
-  @import '../css/reset.css';
   .choose{
     background: rgba(0,0,0,0.1);
   }
@@ -24,34 +30,41 @@
     width: 100%;
     height: 100%;
     background:#318CB8;
-    .icon{
-      float: left;
-      width: 32px;
-      height: 32px;
-      margin-top: 20px;
-      margin-right: 10px;
-      text-align: center;
-      vertical-align: middle;
-      font-size: 22px;
-    }
     .headerBox{
       height: 100%;
-      width: 1400px;
+      width: 1200px;
       margin: 0 auto;
-      li{
-        line-height:60px;
-        color:#fff;
-        font-size: 16px;
+      .icon{
         float: left;
+        width: 32px;
+        height: 32px;
+        margin-top: 20px;
+        margin-right: 10px;
         text-align: center;
+        vertical-align: middle;
+        font-size: 28px;
+        color: #fff;
       }
-      .title{
+      .menu{
         float: left;
         width: 520px;
-        height: 100%;
-        li{
-          height: 100%;
-          width: 25%;
+        .el-menu-demo{
+          width: 100%;
+          height: 100;
+          border:none;
+          .el-menu-item{
+            width: 25%;
+            text-align: center;
+            font-size: 16px;
+            border: 0;
+          }
+          .el-menu-item:hover{
+            background: rgba(0,0,0,0.10) !important;
+          }
+          .el-menu-item.is-active{
+            border-bottom: none !important;
+            background: rgba(0,0,0,0.10) !important;
+          }
         }
       }
       .operate{
@@ -60,6 +73,11 @@
         li{
           width: 130px;
           height: 100%;
+          color: #fff;
+          font-size: 16px;
+          float: left;
+          text-align: center;
+          line-height: 60px;
         }
       }
     }
@@ -67,38 +85,37 @@
 </style>
 <script>
 export default{
-    props:{
-      registerShow:{
-        type: Boolean,
-        default: false
-      }
-    },
     data(){
         return {
-          items:[
+          activeIndex: '1',
+          registerShow:'true',
+          menus: [
             {
-              title:'首页',
-              choose:true
+              name: '首页',
+              path: '/homePage/index'
             },
             {
-              title:'专属SRC',
-              choose:false
+              name: '专属SRC',
+              path: '/homePage/src'
             },
             {
-              title:'奖励活动',
-              choose:false
+              name: '奖励活动',
+              path: '/homePage/award'
             },
             {
-              title:'了解我们',
-              choose:false
-            },
-          ]
+              name: '了解我们',
+              path: '/homePage/understand/loopholeReward'
+            }
+          ],
         }
     },
     methods:{
-      chooseTitle(item){
-        this.items.forEach(v => v.choose = false);
-        item.choose = !item.choose;
+      handleSelect(key, keyPath) {
+        if(key.includes('understand')){
+          this.registerShow = false;
+        }else{
+          this.registerShow = true;
+        }
       }
     }
 }

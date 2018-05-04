@@ -7,7 +7,10 @@
     </el-carousel>
   </div>
 </template>
-<style>
+<style lang="scss" scoped>
+  .el-carousel{
+    width: 100%;
+  }
   .el-carousel__item img {
     width: 100%;
     height: 100%;
