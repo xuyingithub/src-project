@@ -1,23 +1,65 @@
 //进度条
-.el-step__head.is-finish{
-  color: #318CB8;
-}
-.el-step__head{
-  .el-step__line{
-    background-color: #BBBBBB;
-    top:30px !important;
-    .el-step__line-inner{
-      border-color: #318CB8;
+.flowContainer{
+  .el-step__head.is-finish{
+    color: #318CB8;
+  }
+  .el-step__head{
+    .el-step__line{
+      background-color: #BBBBBB;
+      top:30px !important;
+      .el-step__line-inner{
+        border-color: #318CB8;
+      }
+    }
+    .el-step__icon{
+      width: 70px;
+      height: 60px;
+      .el-step__icon-inner{
+        font-size: 50px;
+      }
     }
   }
-  .el-step__icon{
-    width: 70px;
-    height: 60px;
-    .el-step__icon-inner{
-      font-size: 50px;
+}
+
+
+.update{
+  .el-step{
+    .el-step__head{
+      opacity: 0.6;
+      color:#318CB8;
+      .el-step__line{
+        width: 3px;
+        opacity: 0.6;
+        background: #318CB8;
+      }
+    }
+    .el-step__main{
+      position: relative;
+      .el-step__title{
+        position: absolute;
+        top: -20px;
+        left: 60px;
+        font-family: PingFangSC-Medium;
+        font-size: 20px;
+        color: #666666;
+        line-height: 60px;
+        padding-bottom: 0;
+      }
+      .el-step__description{
+        position: absolute;
+        top: -12px;
+        left: -230px;
+        font-family: PingFangSC-Medium;
+        font-size: 20px;
+        color: #999999;
+        line-height: 60px;
+        height: 60px;
+      }
     }
   }
 }
+
+
 
 
 

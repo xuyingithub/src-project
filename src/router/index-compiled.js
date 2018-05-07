@@ -32,6 +32,10 @@ var _list5 = require('../components/understand/list');
 
 var _list6 = _interopRequireDefault(_list5);
 
+var _details = require('../components/exclusiveSrc/details');
+
+var _details2 = _interopRequireDefault(_details);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 _vue2.default.use(_vueRouter2.default);
@@ -51,6 +55,10 @@ exports.default = new _vueRouter2.default({
       path: 'src',
       name: 'exclusiveSrc',
       component: _list2.default
+    }, {
+      path: 'details',
+      name: 'srcDetails',
+      component: _details2.default
     }, {
       path: 'award',
       name: 'award',

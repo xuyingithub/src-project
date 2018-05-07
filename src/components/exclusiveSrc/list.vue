@@ -7,7 +7,7 @@
       <div class="title"><h3>专属SRC</h3><span>企业发布悬赏，感谢白帽子参与安全保障计划</span></div>
       <div class="card">
         <card v-for="(list,index) in cardList" :key="index" :boxStyle="boxStyle" :paddingStyle="{padding:'0px'}">
-          <div class="img"></div>
+          <div class="img" @click="details"></div>
           <h3>{{list.title}}</h3>
           <span>{{list.href}}</span>
           <el-button class="button">提交漏洞</el-button>
@@ -187,6 +187,11 @@
     },
     components:{
       Card
+    },
+    methods:{
+      details(){
+        this.$router.push({name: 'srcDetails'});
+      }
     }
   }
 </script>

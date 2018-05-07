@@ -4,7 +4,7 @@
          <span class="icon el-icon-date"></span>
          <div class="menu">
            <el-menu
-             default-active="/menu/index"
+             default-active="/homePage/index"
              class="el-menu-demo"
              :router="true"
              mode="horizontal"

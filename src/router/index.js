@@ -5,6 +5,7 @@ import Index from '../components/index/Index'
 import ExclusiveSrc from '../components/exclusiveSrc/list'
 import Award from '../components/award/list'
 import Understand from '../components/understand/list'
+import srcDetails from '../components/exclusiveSrc/details'
 
 Vue.use(Router)
 
@@ -25,7 +26,12 @@ export default new Router({
         {
           path: 'src',
           name: 'exclusiveSrc',
-          component: ExclusiveSrc
+          component: ExclusiveSrc,
+        },
+        {
+          path: 'details',
+          name: 'srcDetails',
+          component: srcDetails
         },
         {
           path: 'award',

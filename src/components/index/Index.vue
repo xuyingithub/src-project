@@ -78,7 +78,7 @@
     <pa-footer></pa-footer>
   </article>
 </template>
-<style lang="scss">
+<style lang="scss" scoped>
   body {
     background-color: #fff;
     .index{
