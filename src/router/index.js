@@ -6,6 +6,7 @@ import ExclusiveSrc from '../components/exclusiveSrc/list'
 import Award from '../components/award/list'
 import Understand from '../components/understand/list'
 import srcDetails from '../components/exclusiveSrc/details'
+import Submit from '../components/exclusiveSrc/submit'
 
 Vue.use(Router)
 
@@ -32,6 +33,11 @@ export default new Router({
           path: 'details',
           name: 'srcDetails',
           component: srcDetails
+        },
+        {
+          path: 'submit',
+          name: 'submit',
+          component: Submit
         },
         {
           path: 'award',

@@ -122,3 +122,64 @@
     line-height: 21px;
   }
 }
+
+
+//表单验证
+.el-form{
+  .el-form-item{
+    margin-top: 30px;
+    margin-bottom: 0;
+    .el-form-item__label{
+      font-family: PingFangSC-Regular;
+      font-size: 14px;
+      color: #00272E;
+      text-align: right;
+      line-height: 10px;
+      margin-top: 15px;
+    }
+    .el-form-item__content{
+      .el-button{
+        width: 100px;
+        height: 44px;
+        font-family: PingFangSC-Regular;
+        font-size: 14px;
+        color: #FFFFFF;
+      }
+      .reset{
+        background: #AEB7C9;
+        border-radius: 2px;
+        margin-right: 15px;
+        margin-left: 22px;
+      }
+      .submit{
+        background: #318CB8;
+        box-shadow: 0 2px 7px 0 rgba(120,137,149,0.25);
+        border-radius: 2px;
+      }
+    }
+  }
+  .el-form-item:last-child{
+    margin-top: 0;
+  }
+  .is-error .el-input__inner{
+    //border-color: #c0c4cc;
+  }
+  .el-checkbox{
+    margin-left: 120px;
+    margin-bottom: 45px;
+    margin-top: 10px;
+    .el-checkbox__input.is-checked+.el-checkbox__label{
+      color: #4C5770;
+    }
+    .el-checkbox__label{
+      font-family: PingFangSC-Regular;
+      font-size: 14px;
+      color: #4C5770;
+      letter-spacing: 0.26px;
+      text-align: left;
+      line-height: 12px;
+    }
+  }
+}
+
+

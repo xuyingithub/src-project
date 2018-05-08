@@ -36,6 +36,10 @@ var _details = require('../components/exclusiveSrc/details');
 
 var _details2 = _interopRequireDefault(_details);
 
+var _submit = require('../components/exclusiveSrc/submit');
+
+var _submit2 = _interopRequireDefault(_submit);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 _vue2.default.use(_vueRouter2.default);
@@ -59,6 +63,10 @@ exports.default = new _vueRouter2.default({
       path: 'details',
       name: 'srcDetails',
       component: _details2.default
+    }, {
+      path: 'submit',
+      name: 'submit',
+      component: _submit2.default
     }, {
       path: 'award',
       name: 'award',
