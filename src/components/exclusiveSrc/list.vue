@@ -8,8 +8,8 @@
       <div class="card">
         <card v-for="(list,index) in cardList" :key="index" :boxStyle="boxStyle" :paddingStyle="{padding:'0px'}">
           <div class="img" @click="routerPush('srcDetails')"></div>
-          <h3>{{list.title}}</h3>
-          <span>{{list.href}}</span>
+          <h3>{{list.companyName}}</h3>
+          <span>{{list.domain}}</span>
           <el-button class="button" @click="routerPush('submit')">提交漏洞</el-button>
         </card>
       </div>
@@ -72,7 +72,6 @@
        width: 100%;
        display: flex;
        flex-wrap: wrap;
-       justify-content: space-between;
         .img{
           width: 82px;
           height: 82px;
@@ -95,6 +94,7 @@
           margin: 10px auto;
           color: #333;
           font-size: 14px;
+          text-align: center;
         }
         .button{
           width: 110px;
@@ -119,74 +119,25 @@
             width:'274px',
             height:'290px',
             marginTop:'20px',
-            marginBottom:'30px'
+            marginBottom:'30px',
+            marginRight:'26px'
           },
-          cardList:[
-            {
-              imgUrl: '',
-              title:'百度',
-              href:'www.pinganjingguanjia.com'
-            },
-            {
-              imgUrl: '',
-              title:'百度',
-              href:'www.pinganjingguanjia.com'
-            },
-            {
-              imgUrl: '',
-              title:'百度',
-              href:'www.pinganjingguanjia.com'
-            },
-            {
-              imgUrl: '',
-              title:'百度',
-              href:'www.pinganjingguanjia.com'
-            },
-            {
-              imgUrl: '',
-              title:'百度',
-              href:'www.pinganjingguanjia.com'
-            },
-            {
-              imgUrl: '',
-              title:'百度',
-              href:'www.pinganjingguanjia.com'
-            },
-            {
-              imgUrl: '',
-              title:'百度',
-              href:'www.pinganjingguanjia.com'
-            },
-            {
-              imgUrl: '',
-              title:'百度',
-              href:'www.pinganjingguanjia.com'
-            },
-            {
-              imgUrl: '',
-              title:'百度',
-              href:'www.pinganjingguanjia.com'
-            },
-            {
-              imgUrl: '',
-              title:'百度',
-              href:'www.pinganjingguanjia.com'
-            },
-            {
-              imgUrl: '',
-              title:'百度',
-              href:'www.pinganjingguanjia.com'
-            },
-            {
-              imgUrl: '',
-              title:'百度',
-              href:'www.pinganjingguanjia.com'
-            }
-          ]
+          cardList:[]
         }
     },
     components:{
       Card
+    },
+    created(){
+      for(let i = 0; i< 12; i++){
+        this.cardList.push({
+          companyId:'123456',
+          award:{high:{max:80000,min:20000},low:{max:80000,min:40000},medium:{max:80000,min:60000}},
+          companyPayScore:0,
+          companyName:'商户name1',
+          domain:'http://www.baidu.com'
+        });
+      }
     },
     methods:{
       routerPush(url){

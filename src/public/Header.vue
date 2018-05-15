@@ -1,10 +1,10 @@
 <template>
     <section class="header">
        <div class="headerBox">
-         <span class="icon el-icon-date"></span>
+         <span class="icon"></span>
          <div class="menu">
            <el-menu
-             default-active="/homePage/index"
+             :default-active="defaultActive"
              class="el-menu-demo"
              :router="true"
              mode="horizontal"
@@ -38,12 +38,10 @@
         float: left;
         width: 32px;
         height: 32px;
-        margin-top: 20px;
+        margin-top: 16px;
         margin-right: 10px;
-        text-align: center;
-        vertical-align: middle;
-        font-size: 28px;
-        color: #fff;
+        background: url("../assets/PSRC_logo1.png") no-repeat 0px 0px;
+        background-size: cover;
       }
       .menu{
         float: left;
@@ -89,6 +87,7 @@ export default{
         return {
           activeIndex: '1',
           registerShow:'true',
+          defaultActive:'',
           menus: [
             {
               name: '首页',
@@ -117,6 +116,9 @@ export default{
           this.registerShow = true;
         }
       }
-    }
+    },
+  created(){
+       this.defaultActive = this.$route.path;
+  }
 }
 </script>

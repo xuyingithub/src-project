@@ -1,0 +1,1 @@
+{"version":3,"sources":["state.js"],"names":[],"mappings":";;;;;AAAA,IAAM,QAAQ;AACb,WAAQ;AADK,CAAd;;kBAIe,K","file":"state-compiled.js","sourcesContent":["const state = {\n isLogin:false\n};\n\nexport default state\n"]}

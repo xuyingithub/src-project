@@ -29,6 +29,7 @@
   import loopholeReward from './loopholeReward'
   import userCenter from './userCenter'
   import contactUs from './contactUs'
+  import { mapState } from 'vuex'
   export default{
     name:'understand',
     data(){
@@ -60,6 +61,12 @@
       loopholeReward,
       userCenter,
       contactUs
+    },
+    computed:{
+      ...mapState(['isLogin'])
+    },
+    created(){
+      console.log(this.isLogin);
     }
   }
 </script>

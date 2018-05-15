@@ -2,30 +2,31 @@
   <article class="index">
     <carousel></carousel>
     <section class="hero">
-      <h3 class="title">{{heroMsg.title}}</h3>
+      <h3 class="title">本月英雄榜</h3>
       <div class="rule">
         <div></div>
-        <span class="el-icon-tickets"></span>
+        <span class="iconfont icon-yingxiongban"></span>
         <div></div>
       </div>
       <div class="heroCard">
         <card :boxStyle="heroMsg.boxStyle" :paddingStyle="{padding:'0px'}" v-for="(detail, index) in heroMsg.details" :key="index">
+          <div class="mask">状元</div>
           <div class="personImg"></div>
           <div class="describe">
-            <h3 class="level">{{detail.level}}</h3>
-            <span class="work">{{detail.work}}</span>
+            <h3 class="level">{{detail.nickname}}</h3>
+            <span class="work">帮助 {{detail.companycounts}} 家厂商发现漏洞</span>
             <div class="line"><i></i></div>
-            <span class="counts">{{detail.counts}}</span>
-            <span class="award">{{detail.award}}</span>
+            <span class="counts">发现漏洞数: {{detail.leakcounts}}</span>
+            <span class="award">获取奖励：{{detail.whitecapscores}}万里通积分</span>
           </div>
         </card>
       </div>
     </section>
     <section class="src">
-      <h3 class="title">{{srcMsg.title}}</h3>
+      <h3 class="title">专属SRC</h3>
       <div class="rule">
         <div></div>
-        <span class="el-icon-tickets"></span>
+        <span class="iconfont icon-zhuanshuSRC"></span>
         <div></div>
       </div>
       <div class="srcCard">
@@ -33,12 +34,16 @@
         <card :boxStyle="srcMsg.boxStyle" :paddingStyle="{padding:'0px'}" v-for="(detail, index) in srcMsg.details" :key="index">
           <div class="companyImg"></div>
           <div class="describe">
-            <h3 class="company">{{detail.company}}</h3>
-            <span class="href">{{detail.href}}</span>
+            <h3 class="company">{{detail.companyName}}</h3>
+            <span class="href">{{detail.domain}}</span>
             <div class="line"><i></i></div>
-            <span class="totalAward">{{detail.totalAward}}</span>
-            <span class="best">{{detail.best}}</span>
-            <span class="award">{{detail.award}}</span>
+            <span class="totalAward">总发放奖励：{{detail.companyPayScores}} 积分</span>
+            <span class="best">最高奖励</span>
+            <span class="best" v-if="isLogin">奖励方式</span>
+            <span class="award">{{detail.award.high.max}} 万里通积分</span>
+            <ul v-if="isLogin" class="dangers">
+              <li v-for="(danger,index) in detail.award" :key="index">{{index|danger}} {{danger.min}}-{{danger.max}}积分</li>
+            </ul>
             <el-button class="button">提交漏洞</el-button>
           </div>
         </card>
@@ -51,21 +56,25 @@
       </div>
     </section>
     <section class="rewardActivity">
-      <h3 class="title">{{heroMsg.title}}</h3>
+      <h3 class="title">奖励活动</h3>
       <div class="rule">
         <div></div>
-        <span class="el-icon-tickets"></span>
+        <span class="iconfont icon-jianglihuodong"></span>
         <div></div>
       </div>
       <div class="rewardCard">
         <card :boxStyle="rewardActivityMsg.boxStyle" :paddingStyle="{padding:'0px'}" v-for="(detail, index) in rewardActivityMsg.details" :key="index">
           <div class="describe">
-          <h3 class="activity">{{detail.activity}}</h3>
+          <h3 class="activity">{{detail.title}}</h3>
           <div class="line"><i></i></div>
-          <span class="range">{{detail.range}}</span>
-          <span class="best">{{detail.best}}</span>
-          <span class="points">{{detail.points}}</span>
-          <span class="time"><i class="el-icon-time"></i><b>{{detail.time}}</b></span>
+          <span class="range">活动范围: {{detail.domain}}</span>
+          <span class="best">最高奖励</span>
+          <span class="best" v-if="isLogin">奖励方式</span>
+          <span class="points">{{detail.award.high.max}}万里通积分</span>
+          <ul v-if="isLogin" class="dangers">
+            <li v-for="(danger,index) in detail.award" :key="index">{{index|danger}} {{danger.min}}-{{danger.max}}积分</li>
+          </ul>
+          <span class="time"><i class="el-icon-time"></i><b>还剩 {{detail.surplusTime}}</b></span>
           </div>
         </card>
       </div>
@@ -85,7 +94,6 @@
       height: 100%;
         .hero,.rewardActivity,.src,{
           width: 100%;
-          height: 720px;
           background: #F1F7FC;
           overflow:hidden;
           .title{
@@ -104,25 +112,45 @@
             display:flex;
             div{
               width: 248px;
-              height: 3px;
+              height: 1px;
               background: #E3E1DD;
             }
-            span{
+            .iconfont{
               display: inline-block;
               width: 40px;
               height: 40px;
-              font-size: 46px;
+              font-size: 50px;
               text-align: center;
-              line-height: 40px;
-              margin: 0 30px;
+              line-height: 32px;
+              margin: 0 20px;
+              color: #979797;
             }
           }
           .heroCard{
             width: 990px;
             height: 400px;
-            margin: 40px auto;
+            margin: 40px auto 100px;
             display: flex;
             justify-content: space-between;
+            .mask{
+              width: 100px;
+              height:0;
+              border-width:0 30px 30px 30px;
+              border-style:none solid solid;
+              border-color:transparent transparent #FBBE24;
+              text-align: center;
+              line-height: 30px;
+              float: right;
+              -ms-transform:rotate(45deg); 	/* IE 9 */
+              -moz-transform:rotate(45deg); 	/* Firefox */
+              -webkit-transform:rotate(45deg); /* Safari 和 Chrome */
+              -o-transform:rotate(45deg); 	/* Opera */
+              margin-top: -40px;
+              margin-right: -25px;
+              font-family: PingFangSC-Medium;
+              font-size: 16px;
+              color: #FFFFFF;
+            }
             .personImg{
               width: 162px;
               height: 162px;
@@ -169,7 +197,6 @@
           }
           .srcCard{
             width: 1440px;
-            height: 394px;
             display: flex;
             align-items: center;
             justify-content: space-around;
@@ -190,7 +217,7 @@
             .describe{
               width: 200px;
               margin: 20px auto;
-              .company,.href,.totalAward,.best,.award{
+              .company,.href,.totalAward,.best,.award,{
                 font-family: PingFangSC-Regular;
                 color: #333;
                 font-size: 14px;
@@ -198,6 +225,16 @@
                 text-align: center;
                 height: 20px;
                 margin-top: 8px;
+              }
+              .dangers{
+                margin-top:8px;
+                li{
+                  line-height: 25px;
+                  color: #666;
+                  font-family: PingFangSC-Regular;
+                  font-size: 14px;
+                  text-align: center;
+                }
               }
               .company{
                 font-family: PingFangSC-Medium;
@@ -251,6 +288,16 @@
               margin-top: 40px;
               font-family: PingFangSC-Medium;
             }
+            .dangers{
+              margin-top:8px;
+              li{
+                line-height: 25px;
+                color: #666;
+                font-family: PingFangSC-Regular;
+                font-size: 14px;
+                text-align: center;
+              }
+            }
             .line{
               display: flex;
               align-items: center;
@@ -286,22 +333,35 @@
                margin: 20px auto;
                line-height: 30px;
                color: #666;
+               position: relative;
                border-radius: 6px;
                i{
-                 margin-left: -10px;
-                 margin-right: 8px;
+                 font-size: 18px;
+                 position: absolute;
+                 top: 6px;
+                 left: 10px;
+               }
+               b{
+                 width: 100px;
+                 position: absolute;
+                 left: 34px;
                }
             }
           }
           .moreBox{
+            margin-bottom: 60px;
             height: 22px;
             .more{
               width: 85px;
               height: 100%;
               margin:0 auto;
-              color: #9C9C9C;
-              font-size: 16px;
               text-align: center;
+              color: #9C9C9C;
+              a{
+                color: #9C9C9C;
+                font-size: 16px;
+                font-family: PingFangSC-Regular;
+              }
             }
           }
         }
@@ -315,108 +375,111 @@
   import paFooter from '../../public/Footer'
   import Carousel from '../../core/carousel'
   import Card from '../../core/card'
+  import { mapState } from 'vuex'
+  import { mapActions } from 'vuex'
   export default{
     name:'index',
     data(){
         return {
           heroMsg: {
-            title:'本月英雄榜',
             boxStyle:{
               width:'290px',
               height:'400px'
             },
             details:[
               {
-                level:'假装白帽子',
-                work:'帮助124家厂商发现漏洞',
-                counts:'发现漏洞数：140',
-                award:'获取奖励：100.000万里通积分'
+                nickname:'小明',
+                companycounts: 1,
+                leakcounts: 4,
+                whitecapscores: 130000
               },
               {
-                level:'假装白帽子',
-                work:'帮助124家厂商发现漏洞',
-                counts:'发现漏洞数：140',
-                award:'获取奖励：100.000万里通积分'
+                nickname:'小明',
+                companycounts: 1,
+                leakcounts: 4,
+                whitecapscores: 130000
               },
               {
-                level:'假装白帽子',
-                work:'帮助124家厂商发现漏洞',
-                counts:'发现漏洞数：140',
-                award:'获取奖励：100.000万里通积分'
+                nickname:'小明',
+                companycounts: 1,
+                leakcounts: 4,
+                whitecapscores: 130000
               }
             ]
           },
           srcMsg: {
-            title:'专属SRC',
             boxStyle:{
-              width:'290px',
-              height:'390px'
+              width:'290px'
+//              height:'390px'
             },
             details:[
               {
-                company:'百度',
-                href:'www.pinganjingguanjia.com',
-                totalAward:'总发放奖励：138.000.000积分',
-                best:'最高奖励',
-                award:'获取奖励：100.000万里通积分'
+                companyId:'123456',
+                award:{high:{max:80000,min:20000},low:{max:80000,min:40000},medium:{max:80000,min:60000}},
+                companyPayScores: 0,
+                companyName:'商户name1',
+                domain:'http://www.baidu.com'
               },
               {
-                company:'阿里音乐',
-                href:'www.pinganyinghang.com',
-                totalAward:'总发放奖励：138.000.000积分',
-                best:'最高奖励',
-                award:'获取奖励：100.000万里通积分'
+                companyId:'123456',
+                award:{high:{max:80000,min:20000},low:{max:80000,min:20000},medium:{max:80000,min:20000}},
+                companyPayScores: 0,
+                companyName:'商户name1',
+                domain:'http://www.baidu.com'
               },
               {
-                company:'腾讯云',
-                href:'www.tengxun.com',
-                totalAward:'总发放奖励：138.000.000积分',
-                best:'最高奖励',
-                award:'获取奖励：100.000万里通积分'
+                companyId:'123456',
+                award:{high:{max:80000,min:20000},low:{max:80000,min:20000},medium:{max:80000,min:20000}},
+                companyPayScores: 0,
+                companyName:'商户name1',
+                domain:'http://www.baidu.com'
               },
               {
-                company:'百度云',
-                href:'www.baiduicould.com',
-                totalAward:'总发放奖励：138.000.000积分',
-                best:'最高奖励',
-                award:'获取奖励：100.000万里通积分'
+                companyId:'123456',
+                award:{high:{max:80000,min:20000},low:{max:80000,min:20000},medium:{max:80000,min:20000}},
+                companyPayScores: 0,
+                companyName:'商户name1',
+                domain:'http://www.baidu.com'
               }
             ]
           },
           rewardActivityMsg:{
             title:'奖励活动',
             boxStyle:{
-              width:'290px',
-              height:'300px'
+              width:'290px'
             },
             details:[
               {
-                activity:'双倍积分',
-                range:'活动范围：www.pingan.com',
-                best:'最高奖励',
-                points:'100.000万里通积分',
-                time:'还剩12:05:24'
+                activityId:'201804281700000211',
+                award:{high:{max:80000,min:20000},low:{max:80000,min:40000},medium:{max:80000,min:60000}},
+                companyName:'商户name1',
+                domain:'http://www.baidu.com',
+                surplusTime:'576:59:17',
+                title:'标题1'
               },
               {
-                activity:'双倍积分',
-                range:'活动范围：www.pingan.com',
-                best:'最高奖励',
-                points:'100.000万里通积分',
-                time:'还剩12:05:24'
+                activityId:'201804281700000211',
+                award:{high:{max:80000,min:20000},low:{max:80000,min:40000},medium:{max:80000,min:60000}},
+                companyName:'商户name1',
+                domain:'http://www.baidu.com',
+                surplusTime:'576:59:17',
+                title:'标题1'
               },
               {
-                activity:'双倍积分',
-                range:'活动范围：www.pingan.com',
-                best:'最高奖励',
-                points:'100.000万里通积分',
-                time:'还剩12:05:24'
+                activityId:'201804281700000211',
+                award:{high:{max:80000,min:20000},low:{max:80000,min:40000},medium:{max:80000,min:60000}},
+                companyName:'商户name1',
+                domain:'http://www.baidu.com',
+                surplusTime:'576:59:17',
+                title:'标题1'
               },
               {
-                activity:'双倍积分',
-                range:'活动范围：www.pingan.com',
-                best:'最高奖励',
-                points:'100.000万里通积分',
-                time:'还剩12:05:24'
+                activityId:'201804281700000211',
+                award:{high:{max:80000,min:20000},low:{max:80000,min:40000},medium:{max:80000,min:60000}},
+                companyName:'商户name1',
+                domain:'http://www.baidu.com',
+                surplusTime:'576:59:17',
+                title:'标题1'
               }
             ]
           }
@@ -426,6 +489,15 @@
       paFooter,
       Carousel,
       Card
+    },
+    created(){
+//      this.login()
+    },
+    computed:{
+      ...mapState(['isLogin'])
+    },
+    methods:{
+      ...mapActions({login:'isLogin'})
     }
   }
 </script>

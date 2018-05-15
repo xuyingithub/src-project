@@ -1,6 +1,6 @@
 import Vue from 'vue'
 import Router from 'vue-router'
-import Menu from '../components/homePage'
+import homePage from '../components/homePage'
 import Index from '../components/index/Index'
 import ExclusiveSrc from '../components/exclusiveSrc/list'
 import Award from '../components/award/list'
@@ -16,7 +16,7 @@ export default new Router({
     {
       path: '/homePage',
       name: 'homePage',
-      component: Menu,
+      component: homePage,
       redirect:'/homePage/index',
       children:[
         {

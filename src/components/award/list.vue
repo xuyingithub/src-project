@@ -7,14 +7,20 @@
       <div class="title"><h3>奖励活动</h3></div>
       <div class="card">
         <card v-for="(list,index) in cardList" :key="index" :boxStyle="boxStyle" :paddingStyle="{padding:'10px'}">
-          <h2>{{list.activity}}</h2>
+          <h2>{{list.title}}</h2>
           <div class="line"></div>
           <div class="img"></div>
           <div class="message">
             <h3>{{list.title}}</h3>
-            <div class="detail range"><span>活动范围:</span><span>{{list.range}}</span></div>
-            <div class="detail best"><span>最高奖励:</span><span>{{list.best}}</span></div>
-            <div class="detail time"><i class="el-icon-time"></i><span>还剩</span><span>{{list.time}}</span></div>
+            <div class="detail range"><span>活动范围: {{list.domain}}</span></div>
+            <div class="detail best"><span>最高奖励: {{list.award.high.max}}万里通积分</span></div>
+            <div v-if="isLogin" class="awardRule">
+              <span class="rule">奖励方式</span>
+              <ul class="dangers">
+                <li v-for="(danger,index) in list.award" :key="index">{{index|danger}}  {{danger.min}}-{{danger.max}}积分</li>
+              </ul>
+            </div>
+            <div class="detail time"><i class="el-icon-time"></i><span>还剩: {{list.surplusTime}}</span></div>
           </div>
         </card>
       </div>
@@ -69,7 +75,6 @@
          width: 100%;
          display: flex;
          flex-wrap: wrap;
-         justify-content: space-between;
          h2{
            text-align: center;
            color: #333;
@@ -94,7 +99,6 @@
          }
          .message{
            width: 260px;
-           height: 154px;
            float: left;
            padding-left: 20px;
            padding-top: 16px;
@@ -110,29 +114,46 @@
            .range{
              color: #333;
              font-family: PingFangSC-Regular;
-             span:first-child{
-               margin-right: 15px;
-             }
            }
            .best{
              color: #666;
              font-family: PingFangSC-Regular;
-             span:first-child{
-               margin-right: 15px;
+           }
+           .awardRule{
+             margin-top:10px;
+             .rule{
+               font-family: PingFangSC-Medium;
+               font-size: 14px;
+               color: #E98C61;
+             }
+             .dangers{
+               margin-top:4px;
+               li{
+                 font-family: PingFangSC-Regular;
+                 font-size: 14px;
+                 color: #666666;
+                 height: 25px;
+                 line-height: 25px;
+               }
              }
            }
            .time{
+             position: relative;
+             height: 20px;
+             margin-bottom: 16px;
              color: #E98C61;
-             font-family: PingFangSC-Medium;
              i{
-               margin-right: 12px;
-               font-size: 16px;
-               float: left;
+               position: absolute;
+               font-size: 20px;
+               left: 0;
              }
              span{
-               float: left;
+               font-family: PingFangSC-Medium;
+               font-size: 14px;
+               position: absolute;
+               left: 30px;
                height: 20px;
-               line-height: 18px;
+               line-height: 20px;
              }
            }
          }
@@ -142,118 +163,40 @@
 </style>
 <script>
   import Card from '../../core/card'
+  import { mapState } from 'vuex'
   export default{
     name:'award',
     data(){
       return {
         boxStyle:{
           width:'388px',
-          height:'208px',
           marginTop:'20px',
-          marginBottom:'28px'
+          marginBottom:'28px',
+          marginRight:'12px'
         },
-        cardList:[
-          {
-            activity:'三倍积分',
-            imgUrl:'',
-            title:'百度安全漏洞',
-            range:'www.baidu.com',
-            best:'100.000万里通积分',
-            time:'12:05:24'
-          },
-          {
-            activity:'三倍积分',
-            imgUrl:'',
-            title:'百度安全漏洞',
-            range:'www.baidu.com',
-            best:'100.000万里通积分',
-            time:'12:05:24'
-          },
-          {
-            activity:'三倍积分',
-            imgUrl:'',
-            title:'百度安全漏洞',
-            range:'www.baidu.com',
-            best:'100.000万里通积分',
-            time:'12:05:24'
-          },
-          {
-            activity:'三倍积分',
-            imgUrl:'',
-            title:'百度安全漏洞',
-            range:'www.baidu.com',
-            best:'100.000万里通积分',
-            time:'12:05:24'
-          },
-          {
-            activity:'三倍积分',
-            imgUrl:'',
-            title:'百度安全漏洞',
-            range:'www.baidu.com',
-            best:'100.000万里通积分',
-            time:'12:05:24'
-          },
-          {
-            activity:'三倍积分',
-            imgUrl:'',
-            title:'百度安全漏洞',
-            range:'www.baidu.com',
-            best:'100.000万里通积分',
-            time:'12:05:24'
-          },
-          {
-            activity:'三倍积分',
-            imgUrl:'',
-            title:'百度安全漏洞',
-            range:'www.baidu.com',
-            best:'100.000万里通积分',
-            time:'12:05:24'
-          },
-          {
-            activity:'三倍积分',
-            imgUrl:'',
-            title:'百度安全漏洞',
-            range:'www.baidu.com',
-            best:'100.000万里通积分',
-            time:'12:05:24'
-          },
-          {
-            activity:'三倍积分',
-            imgUrl:'',
-            title:'百度安全漏洞',
-            range:'www.baidu.com',
-            best:'100.000万里通积分',
-            time:'12:05:24'
-          },
-          {
-            activity:'三倍积分',
-            imgUrl:'',
-            title:'百度安全漏洞',
-            range:'www.baidu.com',
-            best:'100.000万里通积分',
-            time:'12:05:24'
-          },
-          {
-            activity:'三倍积分',
-            imgUrl:'',
-            title:'百度安全漏洞',
-            range:'www.baidu.com',
-            best:'100.000万里通积分',
-            time:'12:05:24'
-          },
-          {
-            activity:'三倍积分',
-            imgUrl:'',
-            title:'百度安全漏洞',
-            range:'www.baidu.com',
-            best:'100.000万里通积分',
-            time:'12:05:24'
-          }
-        ]
+        cardList:[]
       }
     },
     components:{
       Card
     },
+    computed:{
+      ...mapState(['isLogin'])
+    },
+    created(){
+      for(let i =0;i<11;i++){
+        this.cardList.push({
+          activityId:'201805140948509281',
+          companyId:'123456',
+          award:{high:{max:80000,min:20000},low:{max:80000,min:40000},medium:{max:80000,min:60000}},
+          companyName:'商户name1',
+          logo:'logo',
+          description:'ddasd',
+          title:'axxxx',
+          domain:'http://www.baidu.com',
+          surplusTime:'576:59:17'
+        });
+      }
+    }
   }
 </script>

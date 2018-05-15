@@ -22,6 +22,12 @@ require('./css/elementUI-reset.scss');
 
 require('./css/reset.css');
 
+var _store = require('./store');
+
+var _store2 = _interopRequireDefault(_store);
+
+require('./filters/danger');
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 _vue2.default.use(_elementUi2.default); // The Vue build version to load with the `import` command
@@ -34,6 +40,7 @@ _vue2.default.config.productionTip = false;
 new _vue2.default({
   el: '#app',
   router: _router2.default,
+  store: _store2.default,
   components: { App: _App2.default },
   template: '<App/>'
 });
