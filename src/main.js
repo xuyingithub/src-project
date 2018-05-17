@@ -8,7 +8,7 @@ import 'element-ui/lib/theme-chalk/index.css';
 import './css/elementUI-reset.scss';
 import './css/reset.css';
 import store from './store';
-import './filters/danger'
+import './filters/global'
 Vue.use(Element);
 
 Vue.config.productionTip = false;

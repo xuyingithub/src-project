@@ -101,6 +101,9 @@
         margin: 100px auto;
       }
     }
+   .flow{
+     👌height: 240px;
+   }
    .grade{
       margin-bottom:300px;
    }
@@ -118,19 +121,19 @@
           },
           {
             title:'待审核',
-            icon:'el-icon-upload'
+            icon:'iconfont icon-daishenhe'
           },
           {
             title:'待确认',
-            icon:'el-icon-picture'
+            icon:'iconfont icon-daiqueding'
           },
           {
             title:'待支付',
-            icon:'el-icon-picture'
+            icon:'iconfont icon-daifukuan'
           },
           {
             title:'待修复',
-            icon:'el-icon-picture'
+            icon:'iconfont icon-daixiufu'
           },
           {
             title:'已关闭',

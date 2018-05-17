@@ -17,7 +17,7 @@
             <span class="work">帮助 {{detail.companycounts}} 家厂商发现漏洞</span>
             <div class="line"><i></i></div>
             <span class="counts">发现漏洞数: {{detail.leakcounts}}</span>
-            <span class="award">获取奖励：{{detail.whitecapscores}}万里通积分</span>
+            <span class="award">获取奖励：{{detail.whitecapscores|format}}万里通积分</span>
           </div>
         </card>
       </div>
@@ -44,13 +44,13 @@
             <ul v-if="isLogin" class="dangers">
               <li v-for="(danger,index) in detail.award" :key="index">{{index|danger}} {{danger.min}}-{{danger.max}}积分</li>
             </ul>
-            <el-button class="button">提交漏洞</el-button>
+            <el-button class="button" @click="routerPush('submit')">提交漏洞</el-button>
           </div>
         </card>
         <i class="arrow el-icon-arrow-right"></i>
       </div>
       <div class="moreBox">
-        <div class="more">
+        <div class="more" @click="routerPush('exclusiveSrc')">
           <a href="javascript:;">查看更多</a><i class="el-icon-arrow-right"></i>
         </div>
       </div>
@@ -79,7 +79,7 @@
         </card>
       </div>
       <div class="moreBox">
-        <div class="more">
+        <div class="more" @click="routerPush('award')">
           <a href="javascript:;">查看更多</a><i class="el-icon-arrow-right"></i>
         </div>
       </div>
@@ -330,7 +330,7 @@
                height: 30px;
                background: rgba(74,144,226,0.13);
                width: 150px;
-               margin: 20px auto;
+               margin: 20px auto 30px;
                line-height: 30px;
                color: #666;
                position: relative;
@@ -375,12 +375,15 @@
   import paFooter from '../../public/Footer'
   import Carousel from '../../core/carousel'
   import Card from '../../core/card'
+  import api from '../../api/index'
   import { mapState } from 'vuex'
   import { mapActions } from 'vuex'
   export default{
     name:'index',
     data(){
         return {
+          //定时器
+          timer : [],
           heroMsg: {
             boxStyle:{
               width:'290px',
@@ -410,7 +413,6 @@
           srcMsg: {
             boxStyle:{
               width:'290px'
-//              height:'390px'
             },
             details:[
               {
@@ -454,7 +456,7 @@
                 award:{high:{max:80000,min:20000},low:{max:80000,min:40000},medium:{max:80000,min:60000}},
                 companyName:'商户name1',
                 domain:'http://www.baidu.com',
-                surplusTime:'576:59:17',
+                surplusTime:'00:00:10',
                 title:'标题1'
               },
               {
@@ -492,12 +494,42 @@
     },
     created(){
 //      this.login()
+//      api.get('activity/whiteCapTop3',null).then( res => {
+//        console.log(res);
+//      });
+      this.countDown();
     },
     computed:{
       ...mapState(['isLogin'])
     },
     methods:{
-      ...mapActions({login:'isLogin'})
+      ...mapActions({login:'isLogin'}),
+      countDown(){
+        this.rewardActivityMsg.details.forEach((v,i) => {
+          var timeArr = v.surplusTime.split(':');
+          var h = timeArr[0];
+          var m = timeArr[1];
+          var s = timeArr[2];
+          var timeSeconds = h*3600+m*60+s*1;
+          this.timer[i] = setInterval(() => {
+            if(timeSeconds > 0){
+              timeSeconds --;
+              var h2 = parseInt(timeSeconds/3600);
+              h2 = h2/10>=1?h2:'0'+h2;
+              var m2 = parseInt((timeSeconds-h2*3600)/60);
+              m2 = m2/10>=1?m2:'0'+m2;
+              var s2 = timeSeconds%3600%60;
+              s2 = s2/10>=1?s2:'0'+s2;
+              v.surplusTime = h2+':'+m2+':'+s2;
+            }else{
+              clearInterval(this.timer[i])
+            }
+          },1000);
+        });
+      },
+      routerPush(url){
+        this.$router.push({name: url});
+      }
     }
   }
 </script>

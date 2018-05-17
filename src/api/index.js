@@ -70,7 +70,8 @@ axios.interceptors.response.use(response => response, (error) => {
   return Promise.resolve(error.response);
 });
 
-axios.defaults.baseURL = '/api';
+axios.defaults.baseURL = '/api/gateway/api';
+// axios.defaults.baseURL = 'https://src-stg.pingan.com/api/gateway/api';
 // 设置默认请求头
 axios.defaults.headers = {
   'X-Requested-With': 'XMLHttpRequest',

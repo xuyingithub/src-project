@@ -26,7 +26,7 @@ var _store = require('./store');
 
 var _store2 = _interopRequireDefault(_store);
 
-require('./filters/danger');
+require('./filters/global');
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 

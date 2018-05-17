@@ -25,4 +25,4 @@ _vue2.default.filter('format', function (num) {
   return (num + '').replace(reg, '$&,');
 });
 
-//# sourceMappingURL=danger-compiled.js.map
+//# sourceMappingURL=global-compiled.js.map

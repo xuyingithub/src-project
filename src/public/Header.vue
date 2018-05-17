@@ -117,8 +117,16 @@ export default{
         }
       }
     },
-  created(){
-       this.defaultActive = this.$route.path;
-  }
+    watch:{
+      $route(cVal,oVal){
+        if(cVal.path.indexOf('submit') != -1){
+          this.defaultActive = '/homePage/src';
+        }else if(cVal.path.indexOf('userCenter') != -1 || cVal.path.indexOf('aboutUs') != -1){
+          this.defaultActive = '/homePage/understand/loopholeReward';
+        }else{
+          this.defaultActive = cVal.path;
+        }
+      }
+    }
 }
 </script>

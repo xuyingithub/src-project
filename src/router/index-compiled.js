@@ -40,6 +40,10 @@ var _submit = require('../components/exclusiveSrc/submit');
 
 var _submit2 = _interopRequireDefault(_submit);
 
+var _test = require('../components/award/test');
+
+var _test2 = _interopRequireDefault(_test);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 _vue2.default.use(_vueRouter2.default);
@@ -75,6 +79,10 @@ exports.default = new _vueRouter2.default({
       path: 'understand/:id',
       name: 'understand',
       component: _list6.default
+    }, {
+      path: 'test',
+      name: 'test',
+      component: _test2.default
     }]
   }]
 });

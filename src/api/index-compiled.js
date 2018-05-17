@@ -89,7 +89,8 @@ _axios2.default.interceptors.response.use(function (response) {
   return _promise2.default.resolve(error.response);
 });
 
-_axios2.default.defaults.baseURL = '/api';
+_axios2.default.defaults.baseURL = '/api/gateway/api';
+// axios.defaults.baseURL = 'https://src-stg.pingan.com/api/gateway/api';
 // 设置默认请求头
 _axios2.default.defaults.headers = {
   'X-Requested-With': 'XMLHttpRequest'

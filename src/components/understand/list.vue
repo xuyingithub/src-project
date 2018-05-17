@@ -64,9 +64,6 @@
     },
     computed:{
       ...mapState(['isLogin'])
-    },
-    created(){
-      console.log(this.isLogin);
     }
   }
 </script>

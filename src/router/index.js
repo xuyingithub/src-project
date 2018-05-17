@@ -7,6 +7,7 @@ import Award from '../components/award/list'
 import Understand from '../components/understand/list'
 import srcDetails from '../components/exclusiveSrc/details'
 import Submit from '../components/exclusiveSrc/submit'
+import test from '../components/award/test'
 
 Vue.use(Router)
 
@@ -48,6 +49,11 @@ export default new Router({
           path: 'understand/:id',
           name: 'understand',
           component: Understand
+        },
+        {
+          path: 'test',
+          name: 'test',
+          component: test
         }
       ]
     }
